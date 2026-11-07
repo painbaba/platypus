@@ -1,5 +1,6 @@
 "use client";
 
+import { sortByName } from "@/lib/utils";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { replaceSearchParam } from "@/lib/search-params";
@@ -231,7 +232,7 @@ export function SkillsList({
     workspaceId ? scope : null,
   );
 
-  const skills = [...skillRows].sort((a, b) => a.name.localeCompare(b.name));
+  const skills = sortByName(skillRows);
 
   // Attach, detach, and Promote a Shared resource are the same rule
   // (ADR-0007 / #154), asked of the auth module instead of re-derived here.

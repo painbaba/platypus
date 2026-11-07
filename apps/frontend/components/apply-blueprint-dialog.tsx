@@ -1,5 +1,6 @@
 "use client";
 
+import { sortByName } from "@/lib/utils";
 import { useState } from "react";
 import {
   Dialog,
@@ -54,7 +55,7 @@ export function ApplyBlueprintDialog({
     "workspaces",
     open ? { orgId } : null,
   );
-  const workspaces = [...results].sort((a, b) => a.name.localeCompare(b.name));
+  const workspaces = sortByName(results);
 
   const reset = () => {
     setWorkspaceId("");

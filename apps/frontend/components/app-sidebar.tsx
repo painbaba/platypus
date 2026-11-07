@@ -1,5 +1,6 @@
 "use client";
 
+import { sortByName } from "@/lib/utils";
 import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useSWRConfig } from "swr";
@@ -201,9 +202,7 @@ export function AppSidebar() {
   const shownChatList =
     settledChatList?.scopeKey === chatListScopeKey ? settledChatList : null;
 
-  const workspaces = [...allWorkspaces].sort((a, b) =>
-    a.name.localeCompare(b.name),
-  );
+  const workspaces = sortByName(allWorkspaces);
   const chats = pins.apply(shownChatList?.data.results ?? []);
   const currentWorkspace = workspaces.find((w) => w.id === workspaceId);
 

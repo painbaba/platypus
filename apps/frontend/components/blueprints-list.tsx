@@ -1,5 +1,6 @@
 "use client";
 
+import { sortByName } from "@/lib/utils";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { DeleteConfirmDialog } from "@/components/delete-confirm-dialog";
@@ -31,7 +32,7 @@ export function BlueprintsList({ orgId }: { orgId: string }) {
     { orgId },
   );
 
-  const blueprints = [...results].sort((a, b) => a.name.localeCompare(b.name));
+  const blueprints = sortByName(results);
 
   const deleteFlow = useDeleteFlow<Serialized<Blueprint>>({
     mutate,

@@ -85,3 +85,14 @@ export async function optionalFetcher<T = unknown>(
   if (!res.ok) throw await fetchError(res);
   return (await res.json()) as T;
 }
+
+/**
+ * A new array with the rows sorted by `name` (localeCompare). The copy before
+ * the sort is the point: list reads come from SWR caches, and sorting one in
+ * place would reorder it behind every other consumer of the cache.
+ */
+export function sortByName<T extends { name: string }>(
+  rows: readonly T[],
+): T[] {
+  return [...rows].sort((a, b) => a.name.localeCompare(b.name));
+}

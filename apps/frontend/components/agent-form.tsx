@@ -1,5 +1,6 @@
 "use client";
 
+import { sortByName } from "@/lib/utils";
 import {
   Field,
   FieldLabel,
@@ -173,7 +174,7 @@ function AgentForm({
     "skills",
     scope,
   );
-  const skills = [...allSkills].sort((a, b) => a.name.localeCompare(b.name));
+  const skills = sortByName(allSkills);
   const [skillQuery, setSkillQuery] = useState("");
   const query = skillQuery.trim();
   // View-only: hidden Skills keep their place in formData.skillIds. cmdk's

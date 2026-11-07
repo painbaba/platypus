@@ -1,5 +1,6 @@
 "use client";
 
+import { sortByName } from "@/lib/utils";
 import { useState } from "react";
 import { AgentAvatar } from "@/components/agent-avatar";
 import { DeleteConfirmDialog } from "@/components/delete-confirm-dialog";
@@ -51,7 +52,7 @@ export function OrgAgentsList({ orgId }: { orgId: string }) {
     mutate,
   } = useScopedList<Agent>("agents", scope);
 
-  const agents = [...rows].sort((a, b) => a.name.localeCompare(b.name));
+  const agents = sortByName(rows);
 
   const deleteFlow = useDeleteFlow<Serialized<Agent>>({
     mutate,

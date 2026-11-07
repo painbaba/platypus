@@ -1,5 +1,6 @@
 "use client";
 
+import { sortByName } from "@/lib/utils";
 import {
   Field,
   FieldLabel,
@@ -95,7 +96,7 @@ function ResourceGroup({
   const { results, isLoading } = useScopedList<SharedResource>(collection, {
     orgId,
   });
-  const resources = [...results].sort((a, b) => a.name.localeCompare(b.name));
+  const resources = sortByName(results);
 
   return (
     <Card className="mb-4">

@@ -1,5 +1,20 @@
 import { describe, it, expect, vi } from "vitest";
-import { fetcher, joinUrl, optionalFetcher } from "./utils";
+import { fetcher, joinUrl, optionalFetcher, sortByName } from "./utils";
+
+describe("sortByName", () => {
+  it("returns the rows sorted by name", () => {
+    expect(
+      sortByName([{ name: "Globex" }, { name: "acme" }, { name: "Borealis" }]),
+    ).toEqual([{ name: "acme" }, { name: "Borealis" }, { name: "Globex" }]);
+  });
+
+  it("returns a new array and leaves the input unchanged", () => {
+    const rows = [{ name: "Globex" }, { name: "Acme" }];
+    const sorted = sortByName(rows);
+    expect(rows.map((row) => row.name)).toEqual(["Globex", "Acme"]);
+    expect(sorted).not.toBe(rows);
+  });
+});
 
 describe("joinUrl", () => {
   it.each([

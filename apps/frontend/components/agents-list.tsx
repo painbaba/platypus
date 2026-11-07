@@ -1,5 +1,6 @@
 "use client";
 
+import { sortByName } from "@/lib/utils";
 import { useState } from "react";
 import { ItemActions } from "@/components/ui/item";
 import { Button } from "@/components/ui/button";
@@ -175,9 +176,7 @@ export function AgentsList({
     );
   };
 
-  const agents = pins
-    .apply(allAgents)
-    .sort((a, b) => a.name.localeCompare(b.name));
+  const agents = sortByName(pins.apply(allAgents));
   // A Pinned Agent shows only in the Pinned group, above the rest.
   const { pinned: pinnedAgents, unpinned: unpinnedAgents } =
     splitPinned(agents);

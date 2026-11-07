@@ -1,5 +1,6 @@
 "use client";
 
+import { sortByName } from "@/lib/utils";
 import { useState, type ReactNode } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CloneDialog } from "@/components/clone-dialog";
@@ -265,9 +266,9 @@ export function TriggerList({
   // Fired One-offs are read too and hidden here, so the list knows whether
   // the Workspace has any triggers at all.
   const allTriggers = toggle.apply(triggerRows);
-  const triggers = allTriggers
-    .filter((trigger) => showFired || !trigger.firedAt)
-    .sort((a, b) => a.name.localeCompare(b.name));
+  const triggers = sortByName(
+    allTriggers.filter((trigger) => showFired || !trigger.firedAt),
+  );
 
   const deleteFlow = useDeleteFlow<Serialized<Trigger>>({
     mutate,

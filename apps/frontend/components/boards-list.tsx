@@ -1,5 +1,6 @@
 "use client";
 
+import { sortByName } from "@/lib/utils";
 import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { defaultFilter } from "cmdk";
@@ -71,9 +72,9 @@ export function BoardsList({
 
   const query = nameFilter.trim();
   // The Command palette's own scorer, applied to the name.
-  const cards = [...rows]
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .filter((card) => !query || defaultFilter(card.name, query) > 0);
+  const cards = sortByName(rows).filter(
+    (card) => !query || defaultFilter(card.name, query) > 0,
+  );
   const page = pageOf(searchParams.get(PAGE_PARAM), cards, BOARDS_PAGE_SIZE);
 
   const deleteFlow = useDeleteFlow<BoardCard>({
